@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # HGGS: Hierarchical Gradient-Based Genetic Sampling
 
 ## 1. Enviroments
@@ -215,3 +216,6 @@ If our work is helpful to you, please consider citing it.
 
 ## ~~7 **Acknowledgement**~~
 
+=======
+# HGGS
+>>>>>>> 29cec05 (Initial commit)
