@@ -1,0 +1,120 @@
+	{
+	  "now": "2024-08-10 17:16:04",
+	  "name": "WRS-1w",
+	  "save_dir": "../../../../output/mlp/reg_2/2param//brusselator//WRS-1w\\20240810_171604",
+	  "config_path": "config.json",
+	  "seed": 53,
+	  "gpu_idx": "0",
+	  "log_dir": "/home/users/rh/Sample/tf_logs/2param/reg_2/WRS-1w\\20240810_171604",
+	  "tensorboard_prefix": "[WRS-1w][2024-08-10 17:16:04] ",
+	  "train_paths": [
+	    "../../../../data/2param//brusselator/train/Baseline/WRS/WRS-1w.csv"
+	  ],
+	  "test_paths": [
+	    "../../../../data/2param/brusselator/val/val_5k.csv"
+	  ],
+	  "ode_model_name": "brusselator",
+	  "xs_param": [
+	    1.0,
+	    3.0
+	  ],
+	  "xs_lb_ub": [
+	    0.0,
+	    5.0
+	  ],
+	  "param_selected": [
+	    0,
+	    1
+	  ],
+	  "xs_selected": [
+	    0,
+	    1
+	  ],
+	  "ys_selected": [
+	    2,
+	    3
+	  ],
+	  "ys_default": [
+	    "",
+	    "",
+	    "",
+	    "",
+	    "",
+	    ""
+	  ],
+	  "xs_weight": [
+	    [
+	      0.0,
+	      5.0
+	    ],
+	    [
+	      0.0,
+	      15.0
+	    ]
+	  ],
+	  "ys_weight": [
+	    1.0,
+	    1.0,
+	    1.0,
+	    1.0,
+	    1.0,
+	    1.0
+	  ],
+	  "ys_name": [
+	    "a",
+	    "b",
+	    "c",
+	    "d",
+	    "e",
+	    "f"
+	  ],
+	  "batch_size": 40960,
+	  "base_lr": 0.002,
+	  "epoch_n": 3000,
+	  "last_epoch_n": 3000,
+	  "nn_layers": [
+	    2,
+	    128,
+	    256,
+	    128,
+	    2
+	  ],
+	  "nn_norm": [
+	    "BatchNorm1d",
+	    "BatchNorm1d",
+	    "BatchNorm1d"
+	  ],
+	  "weight_decay": 0.0005,
+	  "warm_up_epoch": 300,
+	  "warm_up_lr_rate": 1e-05,
+	  "lr_alpha": 0.2,
+	  "loss_func_type": [
+	    "MSELoss"
+	  ],
+	  "init_strategy": "xiver",
+	  "dropout": 0.0,
+	  "iter_count": 20,
+	  "Algorithm_type": [
+	    "../../../../data/2param/brusselator/train/Baseline/WRS/pool-5k.csv",
+	    250
+	  ],
+	  "wandb_swith": false,
+	  "finetune_epoch": 3000,
+	  "finetune_count": 20,
+	  "tau": -1.0,
+	  "dataset_type": "default",
+	  "uniform_sampling_ratio": 0.3,
+	  "boundary_sampling_ratio": 0.2,
+	  "boundary_KNN": 5,
+	  "train_strategy": "WRS",
+	  "fitness_strategy": "S",
+	  "pretrained_model_path": "None",
+	  "total_training_samples": 10000,
+	  "Early_Stopping": true,
+	  "Ada_Gradient_Settings": [
+	    "../../../../output/mlp/reg_2/2param//brusselator//WRS-1w\\20240810_171604\\unfiltered_data.csv",
+	    5
+	  ],
+	  "Gaussian_Mixture": true,
+	  "sampling_core": 4
+	}
