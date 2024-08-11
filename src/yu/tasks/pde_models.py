@@ -1,9 +1,3 @@
-"""
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-03-29
-@description: pde models
-"""
 from random import random
 from typing import List, Any
 
