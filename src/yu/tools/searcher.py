@@ -1,9 +1,3 @@
-"""
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-04-05 15:28
-@description: 
-"""
 import abc
 import json
 from typing import List
@@ -27,7 +21,7 @@ class Position:
 
     @classmethod
     def from_str(cls, s: str):
-        """ 从字符串中加载 """
+        """ load from str """
         tmp = json.loads(s)
         ret = cls(coords=tmp.get('coords', []))
         if 'score' in tmp:
@@ -36,22 +30,16 @@ class Position:
 
 
 class Target(metaclass=abc.ABCMeta):
-    """ 算子对象 """
-    # 当前计算的格子
+    """  """
     positions: List[Position]
-    # 最大切分次数
     max_split_times: int
-    # 每次切分成几个格子
     per_split_n: List[int]
-    # 开始的时候切分几次
     init_split_n: int
-    # 维度
     dimensions: int
-    # 概率阈值
     threshold: List[float]
 
     def dump_positions(self, type = False):
-        """ 将 positions 转化为 str """
+        """  """
         if type:
             if self.positions:
                 return str(self.positions[-1])
@@ -59,7 +47,7 @@ class Target(metaclass=abc.ABCMeta):
         return '|'.join([str(item) for item in self.positions or []])
 
     def load_positions(self, s: str):
-        """ 将 str 转化为 positions """
+        """  """
         self.positions = []
         if s:
             for tmp in s.split('|'):
@@ -67,14 +55,14 @@ class Target(metaclass=abc.ABCMeta):
 
     def position(self, type = False):
         if type:
-            # type=1表示是File_Data模式
+            # type=1 => File Data
             return np.array(self.positions[-1].coords), self.per_split_n[0], 1
-        """ 计算坐标值，并返回坐标向量和总边长长度 """
+        """ Calculate the coordinate values and return the coordinate vector along with the total edge length. """
         depth = len(self.positions)
         coords = np.zeros(self.dimensions)
         edge = 1
 
-        # depth的长度即代表再对原Grid进行几次切分
+        # The length of depth indicates the number of times the original Grid is subdivided.
         for i in range(depth - 1, -1, -1):
             for j in range(self.dimensions):
                 coords[j] += self.positions[i].coords[j] * edge
@@ -83,7 +71,7 @@ class Target(metaclass=abc.ABCMeta):
         return coords, edge, depth
 
     def can_split(self):
-        """ 判断格子是否还可以继续拆分 """
+        """ split """
         if not self.positions or len(self.positions) >= self.max_split_times:
             return False
 
@@ -101,7 +89,7 @@ class Target(metaclass=abc.ABCMeta):
 
 
 class Searcher(metaclass=abc.ABCMeta):
-    """ 算子 """
+    """  """
     def __init__(self, **kwargs):
         pass
 
@@ -143,7 +131,7 @@ class BFS(Searcher):
         target.load_positions(self.queue.get())
 
         while target.positions and len(target.positions) < target.init_split_n:
-            # 若当前格子可拆分；
+            # 
             if target.can_split():
                 self._put_split(target)
 
@@ -152,7 +140,7 @@ class BFS(Searcher):
         return self
 
     def _put_split(self, target: Target):
-        """ 填充子格子 """
+        """  """
         per_split_n = target.per_split_n[len(target.positions)]
         total = per_split_n ** target.dimensions
         i = 0
@@ -194,13 +182,13 @@ class DFS(Searcher):
             return self
 
         current = target.positions[-1]
-        # 当前格子可以继续拆分
+        # can split
         if target.can_split():
             child = Position(
                 coords=[0] * target.dimensions,
             )
             target.positions.append(child)
-        # 否则，寻找下一个格子
+        # next
         else:
             while current:
                 i = target.dimensions - 1
@@ -208,7 +196,7 @@ class DFS(Searcher):
                     current.coords[i] = 0
                     i -= 1
                     continue
-                # 若当前层的划分未全部计算完成，则继续
+                # not end
                 if i >= 0:
                     current.coords[i] += 1
                     break
@@ -216,12 +204,12 @@ class DFS(Searcher):
                     target.positions.pop()
                     current = target.positions[-1] if target.positions else None
 
-        # 格子的深度不能少于初始化的深度
+        # validate
         self._validate_init_split(target)
 
     @staticmethod
     def _validate_init_split(target: Target):
-        """ 检查格子深度是否大于等于设定的深度 """
+        """ check """
         while target.positions and len(target.positions) < target.init_split_n:
             target.positions.append(Position(
                 coords=[0] * target.dimensions,
@@ -269,12 +257,12 @@ class File_Data(Searcher):
             return self
 
         target.positions.pop()
-        # 格子的深度不能少于初始化的深度
+        # check
         self._validate_init_split(target)
 
     @staticmethod
     def _validate_init_split(target: Target):
-        """ 检查格子深度是否大于等于设定的深度 """
+        """ check """
         while target.positions and len(target.positions) < target.init_split_n:
             target.positions.append(Position(
                 coords=[0] * target.dimensions,
