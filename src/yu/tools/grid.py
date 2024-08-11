@@ -10,21 +10,19 @@ from yu.tools.searcher import File_Data
 
 
 class Grid(Target):
-    """ 切分格子, 并根据格子的得分决定是否大于阈值来决定是否继续切分 """
-    # 是否自动保存
+    """ split grid """
+    # auto save?
     auto_save: bool
-    # 保存目录
+    # save dir
     save_dir: str
-    # 是否已初始化
+    # is init?
     inited: bool = False
     # data file
     data_f = None
     # search type
     search_type: SearchType
     searcher: Searcher
-    # 其他字段
     kwargs: dict
-    # 非序列化的字段
     exclude_fields = ['exclude_fields', 'inited', 'positions', 'data_f', 'searcher']
 
     def __init__(
@@ -62,7 +60,7 @@ class Grid(Target):
 
     @classmethod
     def reload(cls, save_dir: str, grid=None):
-        """ 重新加载上次记录 """
+        """ reload from """
         if not grid:
             self = cls(
                 max_split_times=0,
@@ -75,12 +73,10 @@ class Grid(Target):
         else:
             self = grid
 
-        # 加载配置，并重新保存（相对路径可能变化，需要重新赋一下值）
         self.load_config(self.config_file)
         self.save_dir = save_dir
         self.save_config()
 
-        # 初始化切分格子
         self.data_f = open(self.data_file, 'a+')
         if self.search_type == SearchType.BFS:
             self.searcher = BFS(**self.kwargs)
@@ -102,34 +98,34 @@ class Grid(Target):
         return self
 
     def _validate_config(self):
-        """ 检查配置是否合法 """
+        """ val? """
         msgs = []
         if self.dimensions < 1:
-            msgs.append(f'维度不能小于1({self.dimensions})')
+            msgs.append(f'dimension < 1({self.dimensions})')
         # for item in self.per_split_n:
         #     if item < 2:
-        #         msgs.append(f'每次切分不能小于2({self.per_split_n})')
+        #         msgs.append(f'item < 2({self.per_split_n})')
         if self.init_split_n > self.max_split_times:
-            msgs.append(f'初始化切分深度({self.init_split_n})不能大于最大切分深度({self.max_split_times})')
+            msgs.append(f'init deep({self.init_split_n}) < max_deep({self.max_split_times})')
         if self.init_split_n < 1:
-            msgs.append(f'初始化切分深度不能小于1({self.init_split_n})')
+            msgs.append(f'init_split_n < 1({self.init_split_n})')
         if self.max_split_times < 1:
-            msgs.append(f'最大切分深度不能小于1({self.max_split_times})')
+            msgs.append(f'max_split_times < 1({self.max_split_times})')
         if msgs:
             raise Exception(','.join(msgs))
 
     def init(self, **kwargs):
-        """ 初始化 """
+        """  """
         if not self.inited:
-            # 保存 config
+            # save config
             self.save_config()
 
-            # 重置数据文件
+            # init
             if not os.path.isdir(os.path.dirname(self.data_file)):
                 os.makedirs(os.path.dirname(self.data_file))
             self.data_f = open(self.data_file, 'w')
 
-            # 初始化切分格子
+            # init grid
             self.positions = []
             if self.search_type == SearchType.BFS:
                 self.searcher = BFS(**self.kwargs)
@@ -140,7 +136,7 @@ class Grid(Target):
             self.searcher.init(self, **kwargs)
 
             self.inited = True
-        # 检查配置
+        # check
         self._validate_config()
         return self
 
@@ -170,31 +166,29 @@ class Grid(Target):
             self.data_f.write(f'{self.dump_positions(type)}\n')
 
     def execute(self, score_calculator, **kwargs):
-        """ 开始计算当前格子的概率 """
+        """ cal """
         self.init(**kwargs)
 
         type = self.search_type == SearchType.File_Data
         while self.positions:
-            # 计算概率
             self.positions[-1].score = score_calculator(
                 *self.position(type), **kwargs)
-            # 保存结果
+            # save
             if self.auto_save:
                 self.save(type)
 
-            # 寻找下一个格子
+            # next grid
             self.next()
 
         self.close()
         return self
 
     def next(self):
-        """ （深度优先）寻找下一个格子 """
+        """  """
         self.searcher.next(self)
         return self
 
     def close(self):
-        # 关闭 data file
         if self.inited and self.data_f:
             self.data_f.close()
             self.data_f = None
