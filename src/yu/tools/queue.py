@@ -1,7 +1,4 @@
 """
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-04-05 10:13
 @description: A queue implement by using sqlite
 """
 from sqlite3 import Connection, connect
@@ -11,7 +8,7 @@ from yu.tools.misc import makedir
 
 
 class SqliteQueue:
-    """ 利用 sqlite 实现的队列，非线程安全 """
+    """ A queue implemented using SQLite, not thread-safe. """
     db_path: str
     conn: Connection
     table: str
@@ -102,7 +99,7 @@ class SqliteQueue:
         return None
 
     def _clear_disabled(self):
-        """ 清除无用的数据 """
+        """ clear """
         cmd = f'''
             DELETE FROM {self.table} WHERE disabled = TRUE;
         '''
@@ -110,7 +107,7 @@ class SqliteQueue:
         self.conn.commit()
 
     def empty(self) -> bool:
-        """ 队列是否为空 """
+        """ is empty? """
         cmd = f'''
             SELECT ID FROM {self.table}
             WHERE disabled = FALSE LIMIT 1;
