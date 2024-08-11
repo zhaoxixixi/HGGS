@@ -1,7 +1,4 @@
 """
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-04-05
 @description: deal with date & time
 """
 
@@ -18,60 +15,60 @@ class TimeUtil(object):
 
     @classmethod
     def now(cls) -> datetime:
-        """ 返回本地时区当前时间 """
+        """ return current """
         return cls.UTC_TZ.localize(datetime.utcnow()).astimezone(cls.LOCAL_TZ)
 
     @classmethod
     def to_locale(cls, dt: datetime):
-        """ 变换为本地时区 """
+        """ transform to local """
         if not dt:
             return dt
         return cls._validate(dt).astimezone(cls.LOCAL_TZ)
 
     @classmethod
     def to_utc(cls, dt: datetime):
-        """ 变换为UTC时区 """
+        """ to UTC """
         if not dt:
             return dt
         return cls._validate(dt).astimezone(cls.UTC_TZ)
 
     @classmethod
     def strptime(cls, date_string, format):
-        """ datetime.strptime, 按本地时区返回 """
+        """ datetime.strptime, return current """
         return cls.LOCAL_TZ.localize(datetime.strptime(date_string, format))
 
     @classmethod
     def strftime(cls, dt: datetime, fmt: str):
-        """ datetime.strftime, 按本地时区返回 """
+        """ datetime.strftime, return current """
         return cls._validate(dt).astimezone(cls.LOCAL_TZ).strftime(fmt)
 
     @classmethod
     def localize(cls, dt: datetime):
-        """ （将未指定时区的 datetime）指定为本地时区 """
+        """ Assign the local time zone to a datetime object when the time zone is not specified. """
         if not dt:
             return dt
         return cls.LOCAL_TZ.localize(dt)
 
     @classmethod
     def day_start(cls, dt: datetime) -> datetime:
-        """ 返回本地时区当前时间 """
+        """ Return the current local time. """
         dt = cls.to_locale(dt)
         return cls.strptime(dt.strftime('%Y-%m-%d'), '%Y-%m-%d')
 
     @classmethod
     def month_start(cls, dt: datetime) -> datetime:
-        """ 返回本地时区当前时间 """
+        """ Return the current local time. """
         dt = cls.to_locale(dt)
         return cls.strptime(dt.strftime('%Y-%m-01'), '%Y-%m-%d')
 
     @classmethod
     def next_month_start(cls, dt: datetime) -> datetime:
-        """ 返回本地时区当前时间 """
+        """ Return the current local time. """
         return cls.month_start(cls.month_start(dt) + timedelta(days=31))
 
     @classmethod
     def year_start(cls, dt: datetime) -> datetime:
-        """ 返回本地时区当前时间 """
+        """ Return the current local time. """
         dt = cls.to_locale(dt)
         return cls.strptime(dt.strftime('%Y-01-01'), '%Y-%m-%d')
 
@@ -85,18 +82,18 @@ class TimeUtil(object):
 
     @staticmethod
     def _validate(dt: datetime):
-        """ 校验是否存在时区信息 """
+        """ Check if timezone information is present. """
         if not dt.tzinfo:
-            raise Exception('datetime 类型必须指定时区')
+            raise Exception('datetime Type must specify a time zone')
         return dt
 
     @classmethod
     def get_date_month(cls, dt: datetime, mon=0):
         """
-        获取几个月前/后 的时间
+        Get the time several months ago/later
         """
         if not dt.tzinfo:
-            raise Exception('datetime 类型必须指定时区')
+            raise Exception('datetime Type must specify a time zone')
 
         if mon < 0:
             return dt - relativedelta(months=-mon)
