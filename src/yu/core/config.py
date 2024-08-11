@@ -1,9 +1,3 @@
-"""
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-04-27 21:05
-@description: Base config class
-"""
 import os.path
 import sys
 from datetime import datetime
