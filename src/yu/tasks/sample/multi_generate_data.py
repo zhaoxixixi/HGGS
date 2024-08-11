@@ -1,9 +1,3 @@
-"""
-@author:
-@email:
-@date: 2023-8-19
-@description:
-"""
 import sys
 import wandb
 
