@@ -9,21 +9,21 @@ class PDEType(StrEnum):
 
 
 class RandomType(StrEnum):
-    """ 随机类型 """
+    """ random """
     NO = 'NO'
     RANDOM = 'RANDOM'
     LHS = 'LHS'
 
 
 class DisplayType(StrEnum):
-    """ 展示类型 """
+    """ display """
     NONE = 'NONE'
     SAVE = 'SAVE'
     SHOW = 'SHOW'
 
 
 class FigureType(StrEnum):
-    """ 图表类型 """
+    """ figure """
     COLOR_MESH = 'COLOR_MESH'
     SCATTER = 'SCATTER'
     SCATTER3D = 'SCATTER3D'
