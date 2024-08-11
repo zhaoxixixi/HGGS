@@ -1,7 +1,4 @@
 """
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-03-29
 @description: convenient tools for save or show plot which is constructed with matplotlib
 """
 import os
