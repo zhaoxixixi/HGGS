@@ -1,9 +1,3 @@
-"""
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-03-30
-@description: misc function tools
-"""
 import json
 import os
 from datetime import datetime
