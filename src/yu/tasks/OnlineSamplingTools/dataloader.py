@@ -1,10 +1,3 @@
-'''
-Author: rh hengrao02@outlook.com
-Date: 2024-03-10 09:15:05
-LastEditors: rh hengrao02@outlook.com
-LastEditTime: 2024-03-10 09:28:16
-Description: dataset
-'''
 from typing import Tuple
 
 import torch
