@@ -1,9 +1,3 @@
-"""
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-03-30
-@description: Grid：用于多维空间等度切分
-"""
 import json
 import os.path
 from typing import List
