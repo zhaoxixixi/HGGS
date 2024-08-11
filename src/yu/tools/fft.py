@@ -1,9 +1,3 @@
-"""
-@author: longlong.yu
-@email: yulonglong.hz@qq.com
-@date: 2023-03-29
-@description:
-"""
 import numpy as np
 import scipy.fft as sp_fft
 from statsmodels.tsa.stattools import acf
