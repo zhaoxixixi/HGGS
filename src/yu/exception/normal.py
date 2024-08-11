@@ -1,9 +1,3 @@
-"""
-@author: longlong.yu
-@email: yu.hz@qq.com
-@date: 2023-04-01
-@description:
-"""
 from yu.const.normal import PDEType
 from yu.exception.base import YuBaseException
 
