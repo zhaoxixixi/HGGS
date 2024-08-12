@@ -21,7 +21,7 @@ from yu.tools.misc import makedir
 from torch.optim.lr_scheduler import LambdaLR
 import wandb
 
-os.environ["WANDB_API_KEY"] = 'dc41b090309d1e30cbaee9e2af0db706e87fc5ca'
+os.environ["WANDB_API_KEY"] = 'WANDB_API_KEY'
 os.environ["WANDB_MODE"] = "offline"
 
 
