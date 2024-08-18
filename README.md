@@ -39,6 +39,8 @@ LHS_code/HSECC.env
 **Cite**
 
 > [Time, Structure, and Fluctuations | Science](https://www.science.org/doi/abs/10.1126/science.201.4358.777)
+>
+> In the code, we call it *brusselator*
 
 #### Cell Cycle System
 
@@ -53,19 +55,23 @@ LHS_code/HSECC.env
 **Cite**
 
 > [Modeling the Cell Division Cycle: M-phase Trigger, Oscillations, and Size Control - ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0022519383711793)
+>
+> In the code, we call it *MPF*
 
 #### Activator Inhibitor System
 
 **Cite**
 
-> 
+> [Mathematical Biology: I. An Introduction | SpringerLink](https://link.springer.com/book/10.1007/b98868)
+>
+> In the code, we call it *PS2_01*
 
 ## 4. Training Model
 
 4.1 **Cloning this repo**
 
 ```python
-https://github.com/zhaoxixixi/HGGS.git
+
 ```
 
 4.2 **Getting Started** 
@@ -106,7 +112,7 @@ The remaining training scripts are located in `src/yu/tasks/train_code`, and the
 python diversity
 ```
 
-4.3 **Citing Us**
+~~4.3 **Citing Us**~~
 
 If our work is helpful to you, please consider citing it.
 
@@ -114,7 +120,5 @@ If our work is helpful to you, please consider citing it.
 
 ```
 
-4.4 **Acknowledgement**
-
-The computation is supported by College of Computer Science and Engineering, Northeastern University. 
+~~4.4 **Acknowledgement**~~
 
