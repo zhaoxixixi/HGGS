@@ -25,7 +25,7 @@ pip install -r requirements.txt
 >
 > src/yu/tasks/OnlineSamplingTools
 >
-> > **Baseline_Training_code: ** folder contains the baseline scripts
+> > **Baseline_Training_code:** folder contains the baseline scripts
 > >
 > > **Config:** training config details
 > >
