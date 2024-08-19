@@ -39,6 +39,20 @@ pip install -r requirements.txt
 >
 > src/yu/tasks/const, src/yu/tasks/core, src/yu/tasks/exception, src/yu/tasks/nn, src/yu/tasks/tools, 
 
+> **ODEs dictory:**
+>
+> Brusselator system: `src/yu/tasks/model_brusselator.py `
+>
+> Cell Cycle system: `src/yu/tasks/model_HSECC.py`, 
+>
+> MPF system: `src/yu/tasks/model_MPF_2_Var.py`, 
+>
+> Activator Inhibitor system: `src/yu/tasks/model_PS2_01.py`, 
+>
+> and the **general model** `src/yu/tasks/model_PS2_01.py`.
+>
+> The **oscillatory frequency is calculated** in `src/yu/tasks/pde_models.py`.
+
 > **data root dirctory**: data/
 >
 > > 2param: A toy example on brusselator system (2 system coefficients)
