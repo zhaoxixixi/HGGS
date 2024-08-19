@@ -1,14 +1,53 @@
-# HGGS
+# HGGS: Hierarchical Gradient-Based Genetic Sampling
 
 ## 1. Enviroments
 
-python version=3.11
+### Python Version
 
-## 2. Requirements
+> python version=3.11.7
 
-```python
+```bash
+conda create -n HGGS python=3.11.7
+```
+
+### Requirements
+
+```bash
+conda activate HGGS
 pip install -r requirements.txt
 ```
+
+## 2. Structure of the Repository
+
+### root dirctory
+
+> **train root dirctory**: 
+>
+> src/yu/tasks/OnlineSamplingTools
+>
+> > **Baseline_Training_code: ** folder contains the baseline scripts
+> >
+> > **Config:** training config details
+> >
+> > **Online_Sampling:** folder contains the HGGS scripts for training
+> >
+> > (Gradient-based [Ada_Gradient_init.py] and Multigrid Genetic Sampling[Genetic_Sampling.py])
+> >
+> > **Sampling_Algorithm:** folder contains the HGGS scripts for sampling
+
+> **data root dirctory**: data/
+>
+> > 2param: A toy example on brusselator system (2 system coefficients)
+> >
+> > 6param: Three biological system, Cell Cycle (*HSECC*),  Mitotic Promoting Factor (*MPF_2_Var*), Activator Inhibitor (*PS2_01*)
+
+> **train/sampling config dirctory**: resource/
+>
+> > **Training config:** OnlineSamplingTools/train.env
+> >
+> > **sample config (LHS):** sample/multi_generate_data.env [For multithreaded LHS]
+
+> **pretrained model dirctory**: output/mlp/reg_2/`x_param`/`system_name`/`model_name`/`seed`/best_network.pth
 
 ## 3. Dataset
 
@@ -50,13 +89,13 @@ LHS_code/HSECC.env
 >
 > In the code, we call it *HSECC*
 
-#### MPF System
+#### Mitotic Promoting Factor (MPF) System
 
 **Cite**
 
 > [Modeling the Cell Division Cycle: M-phase Trigger, Oscillations, and Size Control - ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0022519383711793)
 >
-> In the code, we call it *MPF*
+> In the code, we call it *MPF_2_Var*
 
 #### Activator Inhibitor System
 
@@ -74,11 +113,19 @@ LHS_code/HSECC.env
 
 ```
 
-4.2 **Getting Started** 
+4.2 **Getting Started**
 
+> Navigate into the repository.
+
+```bash
 cd src/yu/tasks/OnlineSamplingTools
+```
 
-> training
+> Create a new virtual enviroment for HGGS. 
+>
+> [skip into section 1 Enviroment]
+
+4.3 **Training**
 
 ```python
 # HGGS-1w
@@ -96,7 +143,9 @@ python multi_seed_train.py [0,1,2,3,4,5] [6,7,8] "HGGS-1w" \
 --Gaussian_Mixture True --Ada_Gradient_Settings "[\"None\", 5]"
 ```
 
-> testing
+The remaining training scripts are located in `src/yu/tasks/train_code`
+
+4.4 **Testing**
 
 ```python
 python test.py --model_name "HGGS-1w" --model_mode "HSECC/" --ode_model_name "HSECC" \
@@ -104,15 +153,27 @@ python test.py --model_name "HGGS-1w" --model_mode "HSECC/" --ode_model_name "HS
 --xs_selected "[0, 1, 2, 3, 4, 5]" --ys_selected "[6, 7, 8]"
 ```
 
-The remaining training scripts are located in `src/yu/tasks/train_code`, and the testing scripts are also in `src/yu/tasks/train_code`.
+The testing scripts are located in `src/yu/tasks/test_code`.
 
-> diveristy output
+> testing for Imbalance Ratio and Gini Index
 
 ```python
-python diversity
+python diversity.py
 ```
 
-~~4.3 **Citing Us**~~
+## 5. Pretrained Model
+
+5.1 download `output.zip`
+
+5.2 unzip
+
+```bash
+unzip output.zip
+```
+
+> **pretrained model dirctory**: output/mlp/reg_2/`x_param`/`system_name`/`model_name`/`seed`/best_network.pth
+
+## ~~6 **Citing Us**~~
 
 If our work is helpful to you, please consider citing it.
 
@@ -120,5 +181,5 @@ If our work is helpful to you, please consider citing it.
 
 ```
 
-~~4.4 **Acknowledgement**~~
+## ~~7 **Acknowledgement**~~
 
