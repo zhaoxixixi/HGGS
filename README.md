@@ -35,6 +35,10 @@ pip install -r requirements.txt
 > >
 > > **Sampling_Algorithm:** folder contains the HGGS scripts for sampling
 
+> **utils dictory:**
+>
+> src/yu/tasks/const, src/yu/tasks/core, src/yu/tasks/exception, src/yu/tasks/nn, src/yu/tasks/tools, 
+
 > **data root dirctory**: data/
 >
 > > 2param: A toy example on brusselator system (2 system coefficients)
