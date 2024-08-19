@@ -49,7 +49,7 @@ pip install -r requirements.txt
 >
 > Activator Inhibitor system: `src/yu/tasks/model_PS2_01.py`, 
 >
-> and the **general model** `src/yu/tasks/model_PS2_01.py`.
+> and the **general model** `src/yu/tasks/ode_model.py`.
 >
 > The **oscillatory frequency is calculated** in `src/yu/tasks/pde_models.py`.
 
