@@ -47,7 +47,7 @@ pip install -r requirements.txt
 > >
 > > **sample config (LHS):** sample/multi_generate_data.env [For multithreaded LHS]
 
-> **pretrained model dirctory**: output/mlp/reg_2/`x_param`/`system_name`/`model_name`/`seed`/best_network.pth
+> **pretrained model dirctory**: output/mlp/reg_2/`xparam`/`system_name`/`model_name`/`seed`/best_network.pth
 
 ## 3. Dataset
 
@@ -65,7 +65,7 @@ LHS_code/HSECC.env
 
 **LHS code**
 
-```python
+```bash
 1. modify resource/sample/multi_generate_data.env
 2. cd src/yu/tasks/sample/
 3. python multi_generate_data.py
@@ -115,19 +115,23 @@ LHS_code/HSECC.env
 
 4.2 **Getting Started**
 
-> Navigate into the repository.
+> **First:** 
+>
+> Create a new virtual enviroment for HGGS. 
+>
+> [skip into section 1 Enviroment]
+
+> **Second:**
+>
+> Navigate to the directory for model training/testing.
 
 ```bash
 cd src/yu/tasks/OnlineSamplingTools
 ```
 
-> Create a new virtual enviroment for HGGS. 
->
-> [skip into section 1 Enviroment]
-
 4.3 **Training**
 
-```python
+```bash
 # HGGS-1w
 python multi_seed_train.py [0,1,2,3,4,5] [6,7,8] "HGGS-1w" \
 --data_path /HSECC/train/GG-Sampling/ --model_path "/HSECC/" \
@@ -143,27 +147,37 @@ python multi_seed_train.py [0,1,2,3,4,5] [6,7,8] "HGGS-1w" \
 --Gaussian_Mixture True --Ada_Gradient_Settings "[\"None\", 5]"
 ```
 
+This code will save the model in: : **output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`**
+
 The remaining training scripts are located in `src/yu/tasks/train_code`
 
 4.4 **Testing**
 
-```python
+> testing for RMSE results
+
+```bash
 python test.py --model_name "HGGS-1w" --model_mode "HSECC/" --ode_model_name "HSECC" \
 --xs_param "[1.53, 0.04, 1.35, 0.02, 1.35, 0.1, 0.00741]" --xs_param_selected "[0, 1, 2, 3, 4, 5]" \
 --xs_selected "[0, 1, 2, 3, 4, 5]" --ys_selected "[6, 7, 8]"
 ```
 
+You should provide the pretrained model in the path: **output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`/best_network.pth**
+
 The testing scripts are located in `src/yu/tasks/test_code`.
 
-> testing for Imbalance Ratio and Gini Index
+> testing for Imbalance Ratio and Gini Index results
 
-```python
+```bash
 python diversity.py
 ```
+
+You can modify the `diversity.py` code between lines 68 and 74 to test other sampling models.
 
 ## 5. Pretrained Model
 
 5.1 download `output.zip`
+
+> Link
 
 5.2 unzip
 
