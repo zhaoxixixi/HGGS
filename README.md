@@ -181,7 +181,7 @@ You can modify the `diversity.py` code between lines 68 and 74 to test other sam
 
 5.1 download `output.zip`
 
-> Link
+> All pretrained models are provied at https://drive.google.com/file/d/16bXqwkUnSJ9p--B76aoMqujarpQRsHyM/view?usp=sharing
 
 5.2 unzip
 
