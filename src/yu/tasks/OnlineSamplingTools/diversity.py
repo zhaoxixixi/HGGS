@@ -66,6 +66,10 @@ def analyze_csv_columns_by_index(directory_path, files, seeds, column_indexes, d
 
 # HSECC
 dir_path = r'../../../../output/mlp/reg_2/6param/HSECC'
-file_names = ['HGGS-1w']
+sampling_model_names = ['HGGS-1w']
+seeds=[53]
 
-analyze_csv_columns_by_index(dir_path, file_names, [53], [6],dim=6)
+# For brusselator: dim=2 (system coefficients)
+# For the other three biological system: dim=6 (system coefficients)
+dimension = 6
+analyze_csv_columns_by_index(dir_path, sampling_model_names, seeds, [dimension], dim=dimension)
