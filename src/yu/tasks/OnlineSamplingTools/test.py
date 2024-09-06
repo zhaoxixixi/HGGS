@@ -203,7 +203,10 @@ if __name__ == '__main__':
         RMSE_Result[-1].append(test_name)
         RMSE_Result[-1].append("{:.4f}".format(get_mean(seeds_result[-1])))
 
-        RMSE_Result[-1].append("{:.4f}".format(np.std(seeds_result[-1], ddof=1)))
+        if len(seeds_result[-1]) > 1:
+            RMSE_Result[-1].append("{:.4f}".format(np.std(seeds_result[-1], ddof=1)))
+        else:
+            RMSE_Result[-1].append("{:.4f}".format(0.0))
     
     save_combine_result_path = r'./result.csv'
     RMSE_Result = np.array(RMSE_Result)
