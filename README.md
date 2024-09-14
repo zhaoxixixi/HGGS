@@ -61,7 +61,7 @@ pip install -r requirements.txt
 
 > **train/sampling config dirctory**: resource/
 >
-> > **Training config:** OnlineSamplingTools/train.env
+> > **Training config:** OnlineSamplingTools/train.env and src/yu/tasks/BioSysConfig/BioSysConfig.py
 > >
 > > **sample config (LHS):** sample/multi_generate_data.env [For multithreaded LHS]
 
