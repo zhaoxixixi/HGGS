@@ -34,8 +34,8 @@ xs_selected = system_config.xs
 ys_selected = system_config.ys
 xs_lb_ub = system_config.xs_lb_ub
 # model settings
-nn_layers = system_config.nn_layers
-BN = system_config.nn_norm
+nn_layers = [len(xs_selected)] + system_config.nn_layers + [len(ys_selected)]
+BN = eval(system_config.nn_norm)
 
 xs_weight = [[xs_lb_ub[0] * xs_param[i], xs_lb_ub[1] * xs_param[i]] for i in range(len(xs_param))]
 xs_weight = np.array(xs_weight)[system_config.param_selected].tolist()

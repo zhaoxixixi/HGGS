@@ -174,7 +174,7 @@ The testing scripts are located in (relative to the root code folder) `src/yu/ta
 > testing for Imbalance Ratio and Gini Index results
 
 ```bash
-python diversity.py --dir_path "../../../../output/mlp/reg_2/6param/HSECC" --model_names "[HGGS-1w]" \
+python diversity.py --dir_path "../../../../output/mlp/reg_2/6param/HSECC" --model_names "HGGS-1w" \
 --seeds "[53]" --system_dimension 6
 ```
 

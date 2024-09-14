@@ -56,8 +56,8 @@ def analyze_csv_columns_by_index(directory_path, files, seeds, column_indexes, d
                 else:
                     print(f"Column index {col_index} is out of range in {filename}")
 
-        di_list.append("{:.2f}".format(np.mean(cur_DI)) + "±" + "{:.2f}".format(np.std(cur_DI, ddof=1)))
-        gini_list.append("{:.2f}".format(np.mean(cur_gini)) + "±" + "{:.2f}".format(np.std(cur_gini, ddof=1)))
+        di_list.append("{:.2f}".format(np.mean(cur_DI)) + "±" + "{:.2f}".format(np.std(cur_DI, ddof=1)) if len(cur_DI) != 1 else "0.0")
+        gini_list.append("{:.2f}".format(np.mean(cur_gini)) + "±" + "{:.2f}".format(np.std(cur_gini, ddof=1)) if len(cur_gini) != 1 else "0.0")
 
     f.writelines(",".join(["-"] + file_names) + '\n')
     f.writelines(",".join(["data imbalance"] + [str(_) for _ in di_list]) + '\n')
@@ -68,7 +68,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dir_path', type=str, default="../../../../output/mlp/reg_2/6param/HSECC")  # train data
-parser.add_argument('--model_names', type=str, default="[HGGS-1w]")  # train data
+parser.add_argument('--model_names', type=str, default="HGGS-1w")  # train data
 parser.add_argument('--seeds', type=str, default="[53]")  # train data
 parser.add_argument('--system_dimension', type=str, default="6")  # train data
 args = parser.parse_args()
@@ -83,8 +83,11 @@ args = parser.parse_args()
 # dimension = 6
 
 dir_path = args.dir_path
-model_names = eval(args.model_names)
+model_names = args.model_names
 seeds = eval(args.seeds)
 system_dimension = int(args.system_dimension)
 
+if type(model_names) is not list:
+    model_names = [model_names]
+print(model_names)
 analyze_csv_columns_by_index(dir_path, model_names, seeds, [system_dimension], dim=system_dimension)
