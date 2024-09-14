@@ -12,7 +12,9 @@ class SysConfig():
             'Error! Only define `[brusselator, HSECC, MPF_2_Var, PS2_01]`'
         assert sampling_name in ['HGGS', 'IS', 'IS-dag', 'US-P', 'US-S', 'VeSSAL', 'WRS']
 
-        train_data_mode = "GG-Sampling" if sampling_name == 'HGGS' else "Baseline"
+        train_data_mode = "GG-Sampling" if sampling_name == 'HGGS' else f"Baseline/{sampling_name}"
+        if sampling_name == 'IS-dag':
+            train_data_mode = "Baseline/IS"
         self.sys_name = sys_name
         if sys_name == 'brusselator':
             self.xs = [0,1]
