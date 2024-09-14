@@ -37,7 +37,11 @@ pip install -r requirements.txt
 
 > **utils directory:**
 >
-> src/yu/tasks/const, src/yu/tasks/core, src/yu/tasks/exception, src/yu/tasks/nn, src/yu/tasks/tools.
+> src/yu/tasks/const: Definition of constant StrEnum data, 
+> src/yu/tasks/core: Configuration utilities for auto-saving, 
+> src/yu/tasks/exception: Custom-defined exceptions, 
+> src/yu/tasks/nn: Neural network definitions, 
+> src/yu/tasks/tools: Script functions definition.
 
 > **ODEs directory:**
 >
@@ -95,6 +99,7 @@ LHS_code/HSECC.env
 
 **Citation**
 
+> Prigogine, I. (1978). Time, structure, and fluctuations. Science, 201(4358), 777-785.
 > [Time, Structure, and Fluctuations | Science](https://www.science.org/doi/abs/10.1126/science.201.4358.777)
 >
 > In the code, we call it *brusselator*
@@ -103,6 +108,7 @@ LHS_code/HSECC.env
 
 **Citation**
 
+> Liu, Z., Pu, Y., Li, F., Shaffer, C. A., Hoops, S., Tyson, J. J., & Cao, Y. (2012). Hybrid modeling and simulation of stochastic effects on progression through the eukaryotic cell cycle. The Journal of chemical physics, 136(3).
 > [Hybrid modeling and simulation of stochastic effects on progression through the eukaryotic cell cycle - PMC (nih.gov)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3272065/)
 >
 > Called *HSECC* in code
@@ -111,6 +117,7 @@ LHS_code/HSECC.env
 
 **Citation**
 
+> Novak, B., & Tyson, J. J. (1993). Modeling the cell division cycle: M-phase trigger, oscillations, and size control. Journal of theoretical biology, 165(1), 101-134.
 > [Modeling the Cell Division Cycle: M-phase Trigger, Oscillations, and Size Control - ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0022519383711793)
 >
 > Called *MPF_2_Var* in code
@@ -119,6 +126,7 @@ LHS_code/HSECC.env
 
 **Citation**
 
+> Murray, J. D. (2007). Mathematical biology: I. An introduction (Vol. 17). Springer Science & Business Media.
 > [Mathematical Biology: I. An Introduction | SpringerLink](https://link.springer.com/book/10.1007/b98868)
 >
 > Called *PS2_01* in code
@@ -127,8 +135,8 @@ LHS_code/HSECC.env
 
 4.1 **Cloning this repo**
 
-```python
-
+```bash
+https://github.com/zhaoxixixi/HGGS.git
 ```
 
 4.2 **Getting Started**
@@ -136,7 +144,7 @@ LHS_code/HSECC.env
 >
 > Create a new virtual enviroment for HGGS. 
 >
-> [See section 1: Enviroments]
+> [See section 1: Enviroments](#1-enviroments)
 
 >
 > Navigate to the directory for model training/testing.
@@ -154,9 +162,9 @@ python multi_seed_train.py "HGGS-1w" --model_path "/HSECC/" \
 --ode_model_name HSECC --total_training_samples 10000 --batch_size 40960
 ```
 
-This code will save the model in this path from the root code directory**output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`**
+This code will save the model in this path from the root code directory**project-root/output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`**
 
-The remaining training scripts are located in (from the root) `src/yu/tasks/train_code`
+The remaining training scripts are located in (from the root) `project-root/src/yu/tasks/train_code`
 
 4.4 **Testing**
 
@@ -167,9 +175,9 @@ python test.py --train_set "HGGS-1w" --model_path "HSECC/" --ode_model_name "HSE
 --seeds "[53]"
 ```
 
-You should provide the pretrained model here (relative to the root code folder):**output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`/best_network.pth**
+You should provide the pretrained model here (relative to the root code folder):**project-root/output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`/best_network.pth**
 
-The testing scripts are located in (relative to the root code folder) `src/yu/tasks/test_code`.
+The testing scripts are located in (relative to the root code folder) `project-root/src/yu/tasks/test_code`.
 
 > testing for Imbalance Ratio and Gini Index results
 
@@ -187,8 +195,8 @@ python diversity.py --dir_path "../../../../output/mlp/reg_2/6param/HSECC" --mod
 5.2 unzip
 
 ```bash
-# move output.zip to root folder 
+# move output.zip to project-root folder 
 unzip output.zip
 ```
 
-> **pretrained model directory**: output/mlp/reg_2/`x_param`/`system_name`/`model_name`/`seed`/best_network.pth
+> Example: **pretrained model directory** output/mlp/reg_2/`x_param`/`system_name`/`model_name`/`seed`/best_network.pth
