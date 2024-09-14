@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # HGGS: Hierarchical Gradient-Based Genetic Sampling
 
 ## 1. Enviroments
@@ -26,21 +25,21 @@ pip install -r requirements.txt
 >
 > src/yu/tasks/OnlineSamplingTools
 >
-> > **Baseline_Training_code:** folder contains the baseline scripts
+> > The **Baseline_Training_code** folder contains the baseline scripts
 > >
 > > **Config:** training config details
 > >
-> > **Online_Sampling:** folder contains the HGGS scripts for training
+> > The **Online_Sampling** folder contains the HGGS scripts for training
 > >
 > > (Gradient-based [Ada_Gradient_init.py] and Multigrid Genetic Sampling[Genetic_Sampling.py])
 > >
-> > **Sampling_Algorithm:** folder contains the HGGS scripts for sampling
+> > The **Sampling_Algorithm** folder contains HGGS scripts for sampling
 
-> **utils dictory:**
+> **utils directory:**
 >
-> src/yu/tasks/const, src/yu/tasks/core, src/yu/tasks/exception, src/yu/tasks/nn, src/yu/tasks/tools, 
+> src/yu/tasks/const, src/yu/tasks/core, src/yu/tasks/exception, src/yu/tasks/nn, src/yu/tasks/tools.
 
-> **ODEs dictory:**
+> **ODEs directory:**
 >
 > Brusselator system: `src/yu/tasks/model_brusselator.py `
 >
@@ -56,9 +55,9 @@ pip install -r requirements.txt
 
 > **data root dirctory**: data/
 >
-> > 2param: A toy example on brusselator system (2 system coefficients)
+> > 2param: The Brusselator system (2 system coefficients)
 > >
-> > 6param: Three biological system, Cell Cycle (*HSECC*),  Mitotic Promoting Factor (*MPF_2_Var*), Activator Inhibitor (*PS2_01*)
+> > 6param: Data for 3 biological systems: Cell Cycle (*HSECC*),  Mitotic Promoting Factor (*MPF_2_Var*), and Activator Inhibitor (*PS2_01*)
 
 > **train/sampling config dirctory**: resource/
 >
@@ -70,7 +69,7 @@ pip install -r requirements.txt
 
 ## 3. Dataset
 
-**In fact, we have already provided the training and test datasets (located in the `data/` directory). If you wish to skip this step and proceed with training the model, please refer to section 4.**
+**We have provided the training and test datasets (located in the `data/` directory). If you wish to skip this step and proceed with training the model, please refer to section 4.**
 
 ### Config
 
@@ -80,7 +79,7 @@ An Example: Cell Cycle System
 
 LHS_code/HSECC.env
 
-### Data Produce
+### Produce Data
 
 **LHS code**
 
@@ -94,7 +93,7 @@ LHS_code/HSECC.env
 
 #### Brusselator System
 
-**Cite**
+**Citation**
 
 > [Time, Structure, and Fluctuations | Science](https://www.science.org/doi/abs/10.1126/science.201.4358.777)
 >
@@ -102,27 +101,27 @@ LHS_code/HSECC.env
 
 #### Cell Cycle System
 
-**Cite**
+**Citation**
 
 > [Hybrid modeling and simulation of stochastic effects on progression through the eukaryotic cell cycle - PMC (nih.gov)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3272065/)
 >
-> In the code, we call it *HSECC*
+> Called *HSECC* in code
 
 #### Mitotic Promoting Factor (MPF) System
 
-**Cite**
+**Citation**
 
 > [Modeling the Cell Division Cycle: M-phase Trigger, Oscillations, and Size Control - ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0022519383711793)
 >
-> In the code, we call it *MPF_2_Var*
+> Called *MPF_2_Var* in code
 
 #### Activator Inhibitor System
 
-**Cite**
+**Citation**
 
 > [Mathematical Biology: I. An Introduction | SpringerLink](https://link.springer.com/book/10.1007/b98868)
 >
-> In the code, we call it *PS2_01*
+> Called *PS2_01* in code
 
 ## 4. Training Model
 
@@ -134,13 +133,11 @@ LHS_code/HSECC.env
 
 4.2 **Getting Started**
 
-> **First:** 
 >
 > Create a new virtual enviroment for HGGS. 
 >
-> [skip into section 1 Enviroment]
+> [See section 1: Enviroments]
 
-> **Second:**
 >
 > Navigate to the directory for model training/testing.
 
@@ -166,9 +163,9 @@ python multi_seed_train.py [0,1,2,3,4,5] [6,7,8] "HGGS-1w" \
 --Gaussian_Mixture True --Ada_Gradient_Settings "[\"None\", 5]"
 ```
 
-This code will save the model in: : **output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`**
+This code will save the model in this path from the root code directory**output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`**
 
-The remaining training scripts are located in `src/yu/tasks/train_code`
+The remaining training scripts are located in (from the root) `src/yu/tasks/train_code`
 
 4.4 **Testing**
 
@@ -180,9 +177,9 @@ python test.py --model_name "HGGS-1w" --model_mode "HSECC/" --ode_model_name "HS
 --xs_selected "[0, 1, 2, 3, 4, 5]" --ys_selected "[6, 7, 8]"
 ```
 
-You should provide the pretrained model in the path: **output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`/best_network.pth**
+You should provide the pretrained model here (relative to the root code folder):**output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`/best_network.pth**
 
-The testing scripts are located in `src/yu/tasks/test_code`.
+The testing scripts are located in (relative to the root code folder) `src/yu/tasks/test_code`.
 
 > testing for Imbalance Ratio and Gini Index results
 
@@ -196,7 +193,7 @@ You can modify the `diversity.py` code between lines 68 and 74 to test other sam
 
 5.1 download `output.zip`
 
-> All pretrained models are provied at https://drive.google.com/file/d/16bXqwkUnSJ9p--B76aoMqujarpQRsHyM/view?usp=sharing
+> All pretrained models are provided at https://drive.google.com/file/d/16bXqwkUnSJ9p--B76aoMqujarpQRsHyM/view?usp=sharing
 
 5.2 unzip
 
@@ -205,17 +202,3 @@ unzip output.zip
 ```
 
 > **pretrained model dirctory**: output/mlp/reg_2/`x_param`/`system_name`/`model_name`/`seed`/best_network.pth
-
-## ~~6 **Citing Us**~~
-
-If our work is helpful to you, please consider citing it.
-
-```
-
-```
-
-## ~~7 **Acknowledgement**~~
-
-=======
-# HGGS
->>>>>>> 29cec05 (Initial commit)
