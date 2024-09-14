@@ -1,9 +1,12 @@
 import numpy as np
 import torch
 import os
+
+
 # https://blog.csdn.net/t18438605018/article/details/123646329
 class EarlyStopping:
     """Early stops the training if validation loss doesn't improve after a given patience."""
+
     def __init__(self, save_path, patience=7, verbose=True, delta=0):
         """
         Args:
@@ -25,7 +28,7 @@ class EarlyStopping:
         self.delta = delta
 
     def __call__(self, val_loss, model):
-        
+
         score = -val_loss
         if self.best_score is None:
             self.best_score = score
