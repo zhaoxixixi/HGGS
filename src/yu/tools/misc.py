@@ -70,3 +70,38 @@ def sample_lhs(lb, ub, n, d):
     sampler = qmc.LatinHypercube(d=d)
     samples = sampler.random(n=n)
     return qmc.scale(samples, [lb], [ub])
+
+def get_sampling_name(train_set: str):
+    if 'HGGS' in train_set:
+        sampling_name = 'HGGS'
+    elif 'IS' in train_set:
+        sampling_name = 'IS'
+    elif 'IS-dag' in train_set:
+        sampling_name = 'IS-dag'
+    elif 'US-P' in train_set:
+        sampling_name = 'US-P'
+    elif 'US-S' in train_set:
+        sampling_name = 'US-S'
+    elif 'VeSSAL' in train_set:
+        sampling_name = 'VeSSAL'
+    elif 'WRS' in train_set:
+        sampling_name = 'WRS'
+    else:
+        assert False, "ERROR! Unknown System: {}".format(train_set)
+    return sampling_name
+
+
+def get_mean(result):
+    return np.mean(result)
+
+def get_cv(result):
+    return np.std(result) / np.mean(result)
+
+def get_ratio(result):
+    mean_data = get_mean(result)
+    max_data = np.max(result)
+    min_data = np.min(result)
+
+    max_ratio = abs(max_data - mean_data) / mean_data
+    min_ratio = abs(min_data - mean_data) / mean_data
+    return max(max_ratio, min_ratio)

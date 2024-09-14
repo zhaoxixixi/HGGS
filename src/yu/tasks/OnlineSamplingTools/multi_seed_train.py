@@ -8,7 +8,8 @@ sys.path.extend(['../../../../src'])  # noqa
 
 import sys, os
 lock = multiprocessing.Lock()
-
+from yu.tasks.BioSysConfig.BioSysConfig import SysConfig
+from yu.tools.misc import get_sampling_name
 def modify(path, seeds):
     if os.path.isfile(path):
         return
@@ -198,128 +199,69 @@ multi_seed script
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('xs_selected')  # 
-parser.add_argument('ys_selected')  # 
-parser.add_argument('train_set')  # 
-parser.add_argument('--data_path', type=str, default='')  # 
-parser.add_argument('--model_path', type=str, default='')  # 
-parser.add_argument('--seeds', type=str, default="[53, 25, 99, 81, 50]")  # 
+parser.add_argument('train_set')  #
+parser.add_argument('--model_path', type=str, default='')  # model save path
+parser.add_argument('--seeds', type=str, default="[53, 25, 99, 81, 50]")  # training with seeds
+parser.add_argument('--ode_model_name', type=str, default="HSECC")  # system model path
 
-parser.add_argument('--ode_model_name', type=str, default="HSECC")  # 
-
-parser.add_argument('--test_paths', type=str,
-                    default="../../../../data/6param/test/new_test/test_5k.csv")  # 
-
-parser.add_argument('--iter_count', type=str, default="10")  # 
-parser.add_argument('--Algorithm_type', type=str,
-                    default="[gene-range, 20, 35, 0.3, 0.3]")  # 
-
-parser.add_argument('--finetune_epoch', type=str, default="500")  # 
-parser.add_argument('--finetune_count', type=str, default="20")  # 
-
-parser.add_argument('--epoch_n', type=str, default="1000")  # 
-parser.add_argument('--warm_up_epoch', type=str, default="100")  # 
-
-parser.add_argument('--dataset_type', type=str, default="default")  # 
-parser.add_argument('--boundary_sampling_ratio', type=str, default="0.05")  # 
-parser.add_argument('--uniform_sampling_ratio', type=str, default="0.05")  # 
-parser.add_argument('--boundary_KNN', type=str, default="10")  # 
-
-parser.add_argument('--last_epoch_n', type=str, default="1000")  # 
-
-parser.add_argument('--base_lr', type=str, default="1e-6")  # 
-parser.add_argument('--max_lr', type=str, default="1e-4")  # 
-parser.add_argument('--train_strategy', type=str, default="Point-GN")  # 
-
-parser.add_argument('--xs_param', type=str,
-                    default="[1.53, 0.04, 1.35, 0.02, 1.35, 0.1, 0.00741]")  # 
-parser.add_argument('--param_selected', type=str, default="[0,1,2,3,4,5]")  # 
-
-parser.add_argument('--pretrained_model_path', type=str, default=None)  # 
-# nn_layers
-# nn_norm
-parser.add_argument('--nn_layers', type=str, default="[128, 128, 128, 128]")  # 
-
-parser.add_argument('--nn_norm', type=str,
-                    default="[\"BatchNorm1d\",\"BatchNorm1d\",\"BatchNorm1d\",\"BatchNorm1d\"]")  # 
-parser.add_argument('--tau', type=str, default="0.5")  # 
-
-parser.add_argument('--lr_alpha', type=str, default="0.2")  # 
-parser.add_argument('--total_training_samples', type=str, default="5000")  # 
-
-# dropout
-parser.add_argument('--dropout', type=str, default="0.2")  # 
-
-parser.add_argument('--batch_size', type=str, default="40960")  # 
-
-# xs_lb_ub
-parser.add_argument('--xs_lb_ub', type=str, default="[0, 10]")  # 
-# Ada_Gradient_Settings
-parser.add_argument('--Ada_Gradient_Settings', type=str, default="[\"Path\", 5]")  # 
-# Gaussian_Mixture
-parser.add_argument('--Gaussian_Mixture', type=str, default="False")  # 
+parser.add_argument('--epoch_n', type=str, default="1000")  # epoch
+parser.add_argument('--warm_up_epoch', type=str, default="100")  # warm up epoch
+parser.add_argument('--last_epoch_n', type=str, default="1000")  # first training epoch
+parser.add_argument('--base_lr', type=str, default="1e-6")  # learning rate
+parser.add_argument('--total_training_samples', type=str, default="5000")  # total sampling count
+parser.add_argument('--batch_size', type=str, default="40960")  # batch size
 
 args = parser.parse_args()
 
-# gpu_list = [3, 3, 3, 3, 3]
-# gpu_list = [5, 5, 5, 5, 5]
-# gpu_list = [6, 6, 6, 6, 6]
-# gpu_list = [7, 7, 7, 7, 7]
-# gpu_list = [1, 1, 1, 1, 1]
-# gpu_list = [2, 2, 2, 2, 2]
-# gpu_list = [4, 4, 4, 4, 4]
 gpu_list = [0, 0, 0, 0, 0]
-# gpu_list = ["cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu", "cpu"]
 pool = multiprocessing.Pool(processes=len(gpu_list))
 if __name__ == '__main__':
-    xs_lb_ub = eval(args.xs_lb_ub)
-    Ada_Gradient_Settings = args.Ada_Gradient_Settings
-    Gaussian_Mixture = eval(args.Gaussian_Mixture)
+    sampling_name = get_sampling_name(args.train_set)
+    system_config = SysConfig(sampling_name, args.ode_model_name)
 
+    Ada_Gradient_Settings = system_config.Ada_Gradient_Settings
+    Gaussian_Mixture = system_config.Gaussian_Mixture
+    tau = system_config.tau
+    train_strategy = system_config.train_strategy
+    # dataset settings
+    dataset_type = system_config.dataset_type
+    boundary_sampling_ratio = system_config.boundary_sampling_ratio
+    uniform_sampling_ratio = system_config.uniform_sampling_ratio
+    boundary_KNN = system_config.boundary_KNN
+    # Importance Sampling settings
+    finetune_epoch = system_config.finetune_epoch
+    finetune_count = system_config.finetune_count
+    # system model settings
+    ode_model_name = system_config.ode_model_name
+    param_selected = system_config.param_selected
+    xs_selected = system_config.xs_selected
+    ys_selected = system_config.ys_selected
+    xs_param = system_config.xs_param
+    xs_lb_ub = system_config.xs_lb_ub
+    # testing set
+    test_paths = system_config.test_paths
+    # training set
+    train_set = args.train_set
+    data_path = system_config.data_path
+    model_path = args.model_path    # model save path
+    # sampling settings
+    Algorithm_type = system_config.Algorithm_type
+    iter_count = system_config.iter_count
+
+    # training model settings
     batch_size = eval(args.batch_size)
-    dropout = eval(args.dropout)
-    pretrained_model_path = args.pretrained_model_path
-
-    nn_layers = eval(args.nn_layers)
-    nn_norm = args.nn_norm
-    tau = float(args.tau)
-    lr_alpha = eval(args.lr_alpha)
     total_training_samples = eval(args.total_training_samples)
-
-    if pretrained_model_path and pretrained_model_path == 'None':
-        pretrained_model_path = None
-
-    max_lr = float(args.max_lr)
-    xs_param = eval(args.xs_param)
-    param_selected = eval(args.param_selected)
-
-    train_strategy = args.train_strategy
-    base_lr = float(args.base_lr)
-    dataset_type = args.dataset_type
-    boundary_sampling_ratio = float(args.boundary_sampling_ratio)
-    uniform_sampling_ratio = float(args.uniform_sampling_ratio)
-    boundary_KNN = int(args.boundary_KNN)
-
-    finetune_epoch = int(args.finetune_epoch)
-    finetune_count = int(args.finetune_count)
-
-    ode_model_name = args.ode_model_name
-    test_paths = args.test_paths
-
-    Algorithm_type = args.Algorithm_type
-
-    iter_count = int(args.iter_count)
+    # max_lr = float(args.max_lr)
     epoch_n = int(args.epoch_n)
     last_epoch_n = int(args.last_epoch_n)
     warm_up_epoch = int(args.warm_up_epoch)
-
     seeds = eval(args.seeds)
-    xs_selected = eval(args.xs_selected)
-    ys_selected = eval(args.ys_selected)
-    
-    train_set = args.train_set
-    data_path = args.data_path
-    model_path = args.model_path
+    # model structure and learning parameters
+    dropout = system_config.dropout
+    nn_layers = system_config.nn_layers
+    nn_norm = system_config.nn_norm
+    lr_alpha = system_config.args.lr_alpha
+    base_lr = float(args.base_lr)
 
     process_list = []
     for i in range(len(seeds)):
@@ -335,8 +277,8 @@ if __name__ == '__main__':
                                             ode_model_name,
                                             test_paths,
                                             xs_param, param_selected,
-                                            max_lr,
-                                            pretrained_model_path,
+                                            -1,
+                                            None,
                                             nn_layers,
                                             nn_norm, tau,
                                             lr_alpha, total_training_samples,
