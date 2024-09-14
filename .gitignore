@@ -1,6 +1,5 @@
-### Example user template template
-### Example user template
+/output/
+/training_config/
+/.idea/
+/src/yu/tasks/OnlineSamplingTools/result-seeds
 
-# IntelliJ project files
-!/output/
-!/training_config/
