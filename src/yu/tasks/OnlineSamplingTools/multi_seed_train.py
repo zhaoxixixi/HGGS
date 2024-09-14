@@ -234,12 +234,12 @@ if __name__ == '__main__':
     # system model settings
     ode_model_name = system_config.ode_model_name
     param_selected = system_config.param_selected
-    xs_selected = system_config.xs_selected
-    ys_selected = system_config.ys_selected
+    xs_selected = system_config.xs
+    ys_selected = system_config.ys
     xs_param = system_config.xs_param
     xs_lb_ub = system_config.xs_lb_ub
     # testing set
-    test_paths = system_config.test_paths
+    test_paths = system_config.test_path
     # training set
     train_set = args.train_set
     data_path = system_config.data_path
@@ -260,7 +260,7 @@ if __name__ == '__main__':
     dropout = system_config.dropout
     nn_layers = system_config.nn_layers
     nn_norm = system_config.nn_norm
-    lr_alpha = system_config.args.lr_alpha
+    lr_alpha = system_config.lr_alpha
     base_lr = float(args.base_lr)
 
     process_list = []
