@@ -187,8 +187,6 @@ The testing scripts are located in (relative to the root code folder) `src/yu/ta
 python diversity.py
 ```
 
-You can modify the `diversity.py` code between lines 68 and 74 to test other sampling models.
-
 ## 5. Pretrained Model
 
 5.1 download `output.zip`

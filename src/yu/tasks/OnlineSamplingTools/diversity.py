@@ -64,12 +64,27 @@ def analyze_csv_columns_by_index(directory_path, files, seeds, column_indexes, d
     f.writelines(",".join(["gini index"] + [str(_) for _ in gini_list]) + '\n')
     f.close()
 
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--dir_path', type=str, default="../../../../output/mlp/reg_2/6param/HSECC")  # train data
+parser.add_argument('--model_names', type=str, default="[HGGS-1w]")  # train data
+parser.add_argument('--seeds', type=str, default="[53]")  # train data
+parser.add_argument('--system_dimension', type=str, default="6")  # train data
+args = parser.parse_args()
+
 # HSECC
-dir_path = r'../../../../output/mlp/reg_2/6param/HSECC'
-sampling_model_names = ['HGGS-1w']
-seeds=[53]
+# dir_path = r'../../../../output/mlp/reg_2/6param/HSECC'
+# sampling_model_names = ['HGGS-1w']
+# seeds=[53]
 
 # For brusselator: dim=2 (system coefficients)
 # For the other three biological system: dim=6 (system coefficients)
-dimension = 6
-analyze_csv_columns_by_index(dir_path, sampling_model_names, seeds, [dimension], dim=dimension)
+# dimension = 6
+
+dir_path = args.dir_path
+model_names = args.model_names
+seeds = args.seeds
+system_dimension = args.system_dimension
+
+analyze_csv_columns_by_index(dir_path, model_names, seeds, [system_dimension], dim=system_dimension)
