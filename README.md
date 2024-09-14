@@ -163,9 +163,8 @@ The remaining training scripts are located in (from the root) `src/yu/tasks/trai
 > testing for RMSE results
 
 ```bash
-python test.py --train_set "HGGS-1w" --model_mode "HSECC/" --ode_model_name "HSECC" \
---xs_param "[1.53, 0.04, 1.35, 0.02, 1.35, 0.1, 0.00741]" --xs_param_selected "[0, 1, 2, 3, 4, 5]" \
---xs_selected "[0, 1, 2, 3, 4, 5]" --ys_selected "[6, 7, 8]"
+python test.py --train_set "HGGS-1w" --model_path "HSECC/" --ode_model_name "HSECC" \
+--seeds "[53]"
 ```
 
 You should provide the pretrained model here (relative to the root code folder):**output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`/best_network.pth**
@@ -175,7 +174,8 @@ The testing scripts are located in (relative to the root code folder) `src/yu/ta
 > testing for Imbalance Ratio and Gini Index results
 
 ```bash
-python diversity.py
+python diversity.py --dir_path "../../../../output/mlp/reg_2/6param/HSECC" --model_names "[HGGS-1w]" \
+--seeds "[53]" --system_dimension 6
 ```
 
 ## 5. Pretrained Model
@@ -187,7 +187,8 @@ python diversity.py
 5.2 unzip
 
 ```bash
+# move output.zip to root folder 
 unzip output.zip
 ```
 
-> **pretrained model dirctory**: output/mlp/reg_2/`x_param`/`system_name`/`model_name`/`seed`/best_network.pth
+> **pretrained model directory**: output/mlp/reg_2/`x_param`/`system_name`/`model_name`/`seed`/best_network.pth

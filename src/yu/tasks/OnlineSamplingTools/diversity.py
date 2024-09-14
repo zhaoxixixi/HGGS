@@ -83,8 +83,8 @@ args = parser.parse_args()
 # dimension = 6
 
 dir_path = args.dir_path
-model_names = args.model_names
-seeds = args.seeds
-system_dimension = args.system_dimension
+model_names = eval(args.model_names)
+seeds = eval(args.seeds)
+system_dimension = int(args.system_dimension)
 
 analyze_csv_columns_by_index(dir_path, model_names, seeds, [system_dimension], dim=system_dimension)
