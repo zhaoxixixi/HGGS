@@ -68,7 +68,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dir_path', type=str, default="../../../../output/mlp/reg_2/6param/HSECC")  # train data
-parser.add_argument('--model_names', type=str, default="HGGS-1w")  # train data
+parser.add_argument('--model_names', type=str, nargs='+', default="HGGS-1w")  # train data
 parser.add_argument('--seeds', type=str, default="[53]")  # train data
 parser.add_argument('--system_dimension', type=str, default="6")  # train data
 args = parser.parse_args()
