@@ -7,7 +7,7 @@
 # descript : training / testing configuration
 
 class SysConfig():
-    def __init__(self, sys_name: str, sampling_name: str):
+    def __init__(self, sampling_name: str, sys_name: str):
         assert sys_name in ['brusselator', 'HSECC', 'MPF_2_Var', 'PS2_01'], \
             'Error! Only define `[brusselator, HSECC, MPF_2_Var, PS2_01]`'
         assert sampling_name in ['HGGS', 'IS', 'IS-dag', 'US-P', 'US-S', 'VeSSAL', 'WRS']
