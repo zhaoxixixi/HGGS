@@ -136,7 +136,7 @@ LHS_code/HSECC.env
 4.1 **Cloning this repo**
 
 ```bash
-https://github.com/zhaoxixixi/HGGS.git
+git clone https://github.com/zhaoxixixi/HGGS.git
 ```
 
 4.2 **Getting Started**
