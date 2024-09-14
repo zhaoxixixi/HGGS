@@ -1,5 +1,5 @@
 ./output/
 ./training_config/
-./.idea/
+.idea
 ./src/yu/tasks/OnlineSamplingTools/result-seeds
 
