@@ -162,7 +162,7 @@ python multi_seed_train.py "HGGS-1w" --model_path "/HSECC/" \
 --ode_model_name HSECC --total_training_samples 10000 --batch_size 40960
 ```
 
-This code will save the model in this path from the root code directory**project-root/output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`**
+This code will save the model in this path from the root code directory: **project-root/output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`**
 
 The remaining training scripts are located in (from the root) `project-root/src/yu/tasks/train_code`
 
@@ -175,7 +175,7 @@ python test.py --train_set "HGGS-1w" --model_path "HSECC/" --ode_model_name "HSE
 --seeds "[53]"
 ```
 
-You should provide the pretrained model here (relative to the root code folder):**project-root/output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`/best_network.pth**
+You should provide the pretrained model here (relative to the root code folder): **project-root/output/mlp/reg_2/`6param`/`HSECC`/`HGGS-1w`/`53`/best_network.pth**
 
 The testing scripts are located in (relative to the root code folder) `project-root/src/yu/tasks/test_code`.
 
