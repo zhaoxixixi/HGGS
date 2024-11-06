@@ -74,7 +74,7 @@ def sample_lhs(lb, ub, n, d):
 def get_sampling_name(train_set: str):
     if 'HGGS' in train_set:
         sampling_name = 'HGGS'
-    elif 'IS' in train_set:
+    elif 'IS' == train_set:
         sampling_name = 'IS'
     elif 'IS-dag' in train_set:
         sampling_name = 'IS-dag'
